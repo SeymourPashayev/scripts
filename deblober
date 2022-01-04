@@ -1,0 +1,22 @@
+#!/usr/local/bin/python
+#----------------------
+# Deblober: a very bad tool for .git blob reading
+#-----------------------
+# Seymour Pashayev
+# gitHub:@SeymourPashayev
+#-----------------------
+# I am not responsible for the things you (or I) break on your system. Use at your own risk.
+
+import sys                 # System passed argument support
+import zlib                # Git packaging library
+import os.path             # For checking for file existence
+
+filename = str(sys.argv[1])                                     # Get the filename
+
+if os.path.exists(filename):
+    compressed_contents = open(filename, 'rb').read()               # Open compressed
+    decompressed_contents = zlib.decompress(compressed_contents)    # Decompress
+    print(decompressed_contents)                                    # Output to the user
+else:
+    print("Input not recognized")
+    print("Usage: deblober <blob-name> (usually a hashed string)")
