@@ -1,0 +1,31 @@
+#!/usr/local/bin/python
+#----------------------
+# Quoter: put quotes around every line
+#-----------------------
+# Seymour Pashayev
+# gitHub:@SeymourPashayev
+#-----------------------
+# I am not responsible for the things you (or I) break on your system. Use at your own risk.
+
+import sys                 # System passed argument support
+import os.path             # For checking for file existence
+from pathlib import Path   # Working with path exstensions
+
+filename = str(sys.argv[1])                                                    # Get the filename
+output_filename = Path(filename).stem + "_output" + Path(filename).suffixes[0]
+lines_to_write= []
+
+if os.path.exists(filename):
+    
+    file=open(filename)
+    output=open(output_filename, 'x')
+
+    for line in file:
+        lines_to_write.append("\""+line.rstrip()+"\""+"\n")
+
+    output.writelines(lines_to_write)
+
+else:
+    print("Input not recognized")
+    print("Usage: quoter <filename>")
+
