@@ -15,17 +15,22 @@ filename = str(sys.argv[1])                                                    #
 output_filename = Path(filename).stem + "_output" + Path(filename).suffixes[0]
 lines_to_write= []
 
+if len(sys.argv) == 3:
+    quote = str(sys.argv[2])
+else:
+    quote = "\""
+
 if os.path.exists(filename):
     
     file=open(filename)
     output=open(output_filename, 'x')
 
     for line in file:
-        lines_to_write.append("\""+line.rstrip()+"\""+"\n")
+        lines_to_write.append(quote+line.rstrip()+quote+"\n")
 
     output.writelines(lines_to_write)
 
 else:
     print("Input not recognized")
-    print("Usage: quoter <filename>")
+    print("Usage: quoter <filename> \"<quote sign>\"")
 
